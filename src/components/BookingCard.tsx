@@ -1,12 +1,18 @@
+import { useState } from "react";
 import { Calendar, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
+import BookingModal from "./BookingModal";
 
 const BookingCard = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   return (
+    <>
+      <BookingModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     <Card className="sticky top-6 shadow-card hover:shadow-card-hover transition-shadow duration-300">
       <CardHeader className="pb-4">
         <div className="flex items-baseline gap-2">
@@ -80,11 +86,15 @@ const BookingCard = () => {
       </CardContent>
       
       <CardFooter>
-        <Button className="w-full bg-hero-gradient hover:opacity-90 transition-opacity">
+        <Button 
+          className="w-full bg-hero-gradient hover:opacity-90 transition-opacity"
+          onClick={() => setIsModalOpen(true)}
+        >
           Reserve
         </Button>
       </CardFooter>
     </Card>
+    </>
   );
 };
 
